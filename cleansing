@@ -1,0 +1,8 @@
+1. some of the rows were having \n in between of the data, causing wrong column separation ->3rows
+
+2. invalid language codes: cn - set as chinese, sh - no language, xx-no language
+
+3. To map language code from the dataset to the original name of the language, we download language-codes.csv, which
+is ISO_639 standard for languages and its codes ->https://datahub.io/core/language-codes
+*Spoken languages column consists of iso_code and language name, but every language is written in original language,
+example: Рускии, that's why once again, we read the english name from the https://datahub.io/core/language-codes
