@@ -13,7 +13,7 @@ class PersonMovieRel(StructuredRel):
 
 
 class DepartmentPersonRel(StructuredRel):
-    job_id = IntegerProperty()
+    #job_id = IntegerProperty()
     job_name = StringProperty()
 
 
@@ -47,6 +47,7 @@ class Movie(StructuredNode):
     production_company = RelationshipTo('Company', 'PRODUCTION_BY', cardinality=ZeroOrMore)
     production_country = RelationshipTo('Country', 'PRODUCTION_IN', cardinality=ZeroOrMore)
     spoken_language = RelationshipTo('Language', 'SPOKEN_LANGUAGE', cardinality=OneOrMore)
+    has_keyword = RelationshipTo('Keyword', 'HAS_KEYWORD', cardinality=ZeroOrMore)
 
 
 class Genre(StructuredNode):
@@ -87,12 +88,13 @@ class Keyword(StructuredNode):
 
 class User(StructuredNode):
     uid = UniqueIdProperty()
-    id = IntegerProperty()
+    user_id = IntegerProperty()
     rated_movie = RelationshipTo('Movie', 'RATED', model=UserMovieRating, cardinality=OneOrMore)
 
 
 class Person(StructuredNode):
     uid = UniqueIdProperty()
+    person_id = IntegerProperty()
     name = StringProperty()
     gender = IntegerProperty()
     cast_in = RelationshipTo('Movie', 'CAST_IN', model=PersonMovieRel, cardinality=ZeroOrOne)  # zero for non actors
