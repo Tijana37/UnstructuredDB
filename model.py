@@ -28,8 +28,8 @@ class Movie(StructuredNode):
     original_title = StringProperty()
     budget = FloatProperty()
     adult = BooleanProperty()
-    ID = IntegerProperty()
-    imdb_ID = StringProperty()
+    movie_id = IntegerProperty()
+    imdb_id = StringProperty()
     overview = StringProperty()
     popularity = FloatProperty()
     poster_path = StringProperty()
@@ -70,7 +70,7 @@ class Language(StructuredNode):
 class Company(StructuredNode):
     uid = UniqueIdProperty()
     name = StringProperty()
-    id = IntegerProperty()
+    company_id = IntegerProperty()
 
 
 class Country(StructuredNode):
@@ -81,7 +81,7 @@ class Country(StructuredNode):
 
 class Keyword(StructuredNode):
     uid = UniqueIdProperty()
-    id = IntegerProperty()
+    keyword_id = IntegerProperty()
     name = StringProperty()
 
 
