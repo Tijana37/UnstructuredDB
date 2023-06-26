@@ -5,35 +5,3 @@ server:
             cookie:
                 name: wp-project
             timeout: 60m
-spring:
-    web:
-      resources:
-          static-locations[0]: "file:src/main/resources/static/"
-          static-locations[1]: "classpath:/static/"
-    mvc:
-        hiddenmethod:
-            filter:
-                enabled: true
-    profiles:
-        active: prod
-    security:
-        oauth2:
-            client:
-                registration:
-                    google:
-                        clientId: 1099480981021-0l3bh7m65eai55tgs72q7sheok65ueu8.apps.googleusercontent.com
-                        clientSecret: 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
-                        scope:
-                            - email
-                            - profile
-
-                    facebook:
-                        clientId: 2843504679275332
-                        clientSecret: c7d4a1e9a195a73749d99b82d4a78f1d
-                        scope:
-                            - email
-                            - public_profile
-    servlet:
-        multipart:
-            enabled: true
-            location: ${java.io.tmpdir}
