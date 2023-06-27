@@ -1,19 +1,14 @@
-from neomodel import config, StructuredNode, StructuredRel, UniqueIdProperty, IntegerProperty, StringProperty, \
-    FloatProperty, BooleanProperty, DateTimeProperty, ZeroOrOne, ZeroOrMore, One, OneOrMore, RelationshipTo
-from enum import Enum
+from neomodel import StructuredNode, StructuredRel, UniqueIdProperty, IntegerProperty, StringProperty, \
+    FloatProperty, BooleanProperty, ZeroOrOne, ZeroOrMore, One, OneOrMore, RelationshipTo, \
+    DateProperty
 
 
-# class Status(Enum):
-#     released = "RELEASED"
-#     rumored = "RUMORED"
-
-class PersonMovieRel(StructuredRel):
+class ActorMovieRel(StructuredRel):
     cast_id = IntegerProperty()
     character_name = StringProperty()
 
 
 class DepartmentPersonRel(StructuredRel):
-    #job_id = IntegerProperty()
     job_name = StringProperty()
 
 
@@ -29,11 +24,11 @@ class Movie(StructuredNode):
     budget = FloatProperty()
     adult = BooleanProperty()
     movie_id = IntegerProperty()
-    imdb_id = StringProperty()
+    imdb_id = IntegerProperty()
     overview = StringProperty()
     popularity = FloatProperty()
     poster_path = StringProperty()
-    release_date = DateTimeProperty()
+    release_date = DateProperty()
     revenue = FloatProperty()
     runtime = IntegerProperty()
     status = StringProperty()
@@ -41,7 +36,7 @@ class Movie(StructuredNode):
     vote_count = IntegerProperty()
     vote_average = FloatProperty()
     # relationships
-    belongs_to = RelationshipTo('Collection', 'BELONGS_TO', cardinality=ZeroOrMore)
+    belongs_to = RelationshipTo('Collection', 'BELONGS_TO', cardinality=ZeroOrOne)
     has_genre = RelationshipTo('Genre', 'HAS_GENRE', cardinality=ZeroOrMore)
     original_language = RelationshipTo('Language', 'ORIGINAL_LANGUAGE', cardinality=One)
     production_company = RelationshipTo('Company', 'PRODUCTION_BY', cardinality=ZeroOrMore)
@@ -97,9 +92,10 @@ class Person(StructuredNode):
     person_id = IntegerProperty()
     name = StringProperty()
     gender = IntegerProperty()
-    cast_in = RelationshipTo('Movie', 'CAST_IN', model=PersonMovieRel, cardinality=ZeroOrOne)  # zero for non actors
+    cast_in = RelationshipTo('Movie', 'CAST_IN', model=ActorMovieRel, cardinality=ZeroOrMore)  # zero for non actors
+    crew_in = RelationshipTo('Movie', 'CREW_IN', cardinality=ZeroOrMore)
     works_in = RelationshipTo('Department', 'WORKS_IN', model=DepartmentPersonRel,
-                              cardinality=One)  # for actors add Acting Department
+                              cardinality=OneOrMore)  # for actors exists department Actors
 
 
 class Department(StructuredNode):  # Rel Person -> Department with property Job
