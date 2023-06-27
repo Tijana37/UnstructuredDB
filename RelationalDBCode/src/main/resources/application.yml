@@ -1,7 +1,0 @@
-server:
-    port: 9090
-    servlet:
-        session:
-            cookie:
-                name: wp-project
-            timeout: 60m
